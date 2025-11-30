@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peserta_pkl', function (Blueprint $table) {
+        Schema::create('peralatan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nomor_induk')->unique();
-            $table->string('sekolah');
-            $table->string('jurusan');
-            $table->date('tanggal_mulai');
-            $table->date('tanggal_selesai');
-            $table->string('pembimbing')->nullable();
-            $table->enum('status', ['aktif', 'selesai', 'berhenti'])->default('aktif');
+            $table->string('nama_peralatan');
+            $table->string('kode_peralatan')->unique();
+            $table->text('deskripsi')->nullable();
+            $table->string('kategori'); // Senjata, Kendaraan, Elektronik, Furnitur, dll
+            $table->string('merek')->nullable();
+            $table->date('tanggal_perolehan');
+            $table->date('tanggal_maintenance')->nullable();
+            $table->string('lokasi_penyimpanan');
+            $table->enum('status', ['tersedia', 'rusak', 'hilang'])->default('tersedia');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('peserta_pkl');
+        Schema::dropIfExists('peralatan');
     }
 };

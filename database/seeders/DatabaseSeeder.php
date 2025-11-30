@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Seed peserta PKL
+        // Seed peralatan dan peminjaman
         $this->call([
-            PesertaPklSeeder::class,
-            AbsensiSeeder::class,
+            PeralatanSeeder::class,
+            PeminjamanSeeder::class,
         ]);
     }
 }

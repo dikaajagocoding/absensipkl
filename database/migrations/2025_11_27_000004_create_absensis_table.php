@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absensis', function (Blueprint $table) {
+        Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('peserta_pkl_id')->constrained('peserta_pkl')->onDelete('cascade');
-            $table->date('tanggal');
-            $table->time('jam_masuk')->nullable();
-            $table->time('jam_keluar')->nullable();
-            $table->string('status')->default('hadir'); // hadir, sakit, izin, alpa
-            $table->text('keterangan')->nullable();
+            $table->foreignId('peralatan_id')->constrained('peralatan')->onDelete('cascade');
+            $table->string('peminjam_nama');
+            $table->string('peminjam_no_induk'); // NIP atau nomor identitas
+            $table->date('tanggal_peminjaman');
+            $table->date('tanggal_pengembalian')->nullable();
+            $table->text('keperluan')->nullable();
+            $table->string('status')->default('dipinjam'); // dipinjam, dikembalikan
+            $table->text('catatan')->nullable();
             $table->timestamps();
-            
-            // Unique constraint untuk 1 peserta hanya bisa 1x absensi per hari
-            $table->unique(['peserta_pkl_id', 'tanggal']);
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absensis');
+        Schema::dropIfExists('peminjaman');
     }
 };

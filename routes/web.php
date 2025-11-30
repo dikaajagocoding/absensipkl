@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AbsensiController;
-use App\Http\Controllers\PesertaPklController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PeralatanController;
 
 Route::get('/', function () {
-    return redirect()->route('absensi.index');
+    return redirect()->route('peminjaman.index');
 });
 
-Route::resource('absensi', AbsensiController::class);
-Route::get('absensi-laporan', [AbsensiController::class, 'laporan'])->name('absensi.laporan');
+Route::resource('peminjaman', PeminjamanController::class);
+Route::get('peminjaman-laporan', [PeminjamanController::class, 'laporan'])->name('peminjaman.laporan');
 
-Route::resource('peserta-pkl', PesertaPklController::class);
+Route::resource('peralatan', PeralatanController::class);
+
